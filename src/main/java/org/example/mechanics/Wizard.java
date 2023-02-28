@@ -1,5 +1,6 @@
 package org.example.mechanics;
 
+import java.util.List;
 import java.util.Random;
 
 public class Wizard {
@@ -14,7 +15,7 @@ public class Wizard {
         this.wizardType = wizardType;
     }
     public void throwSpell(String spell, Wizard enemyWizard) {
-        SpellType spellType = SpellType.valueOf(spell);
+        SpellType spellType = getSpell(spell);
         if (this.hp == 0)
             System.out.println("you are death, cannot throw any spells");
         else if (enemyWizard == null)
@@ -24,6 +25,20 @@ public class Wizard {
         else
             hpCheck(spellType, enemyWizard);
     }
+
+    private SpellType getSpell(String spell) {
+        if(spell.equals("heal"))
+            return SpellType.valueOf("HEAL");
+        if(spell.equals("fireball"))
+            return SpellType.valueOf("FIREBALL");
+        if(spell.equals("shitStorm"))
+            return SpellType.valueOf("SHIT_STORM");
+        if(spell.equals("lightingStrike"))
+            return SpellType.valueOf("LIGHTING_STRIKE");
+        return null;
+    }
+
+
     private boolean knownSpells(SpellType spell) {
         SpellType[] knownSpell = this.wizardType.getSpellTypes();
         for (SpellType value : knownSpell) {
